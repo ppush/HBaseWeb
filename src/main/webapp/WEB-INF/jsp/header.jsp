@@ -40,7 +40,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#">HBaseWeb</a>
+                        <a class="navbar-brand" href="<c:url value="/"/>">HBaseWeb</a>
                     </div>
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
