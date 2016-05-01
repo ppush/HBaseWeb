@@ -1,5 +1,4 @@
-<div class="footer">     
-    fffffffffffffff
+<div class="footer">         
 </div>
 
 </div>    

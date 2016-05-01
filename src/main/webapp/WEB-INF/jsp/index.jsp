@@ -4,11 +4,28 @@
     Author     : vahan
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    <jsp:include page="header.jsp" />
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="/WEB-INF/customTag.tld" prefix="ct" %>
 
-        <h4>Spring 4 Web MVC via Annotations</h4>
-        Spring says: <span class="blue">${msg}</span>        
-        <p><a class="btn btn-lg btn-success" href="<c:url value="/page2"/>">Go to Page2</a></p>
+<jsp:include page="header.jsp" />
 
-    <jsp:include page="footer.jsp" />
+<h4>Spring 4 Web MVC via Annotations</h4>
+<div class="row">
+    <div class="col-lg-2">
+        <c:forEach var="table" items="${tables}">
+            <p><a href="?tablename=${table.getNameAsString()}">${table.getNameAsString()}</a></p>
+        </c:forEach>
+    </div>    
+    <div class="col-lg-8">
+        <h2>${tablename}</h2>                 
+        <c:forEach var="value" items="${values}">                   
+            <p>RAW ID as toString = ${value.getRow()}</p>            
+            <p>RAW ID as IntStr    = ${ct:bytesToIntStr(value.getRow())}</p>
+            <p>RAW ID as HEX    = ${ct:bytesToHex(value.getRow())}</p>
+            <p>RAW ID as string = ${ct:byteAsString(value.getRow())}</p>
+
+        </c:forEach>                        
+    </div>        
+</div>    
+<jsp:include page="footer.jsp" />
 
