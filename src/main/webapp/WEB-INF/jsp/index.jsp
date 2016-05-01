@@ -14,17 +14,32 @@
     <div class="col-lg-2">
         <c:forEach var="table" items="${tables}">
             <p><a href="?tablename=${table.getNameAsString()}">${table.getNameAsString()}</a></p>
+            <ul>
+                <c:forEach var="families" items="${table.getFamilies()}">
+                    <li>${ct:byteAsString(families.getName())}</li>
+                </c:forEach>     
+            </ul>
         </c:forEach>
     </div>    
     <div class="col-lg-8">
         <h2>${tablename}</h2>                 
-        <c:forEach var="value" items="${values}">                   
-            <p>RAW ID as toString = ${value.getRow()}</p>            
-            <p>RAW ID as IntStr    = ${ct:bytesToIntStr(value.getRow())}</p>
-            <p>RAW ID as HEX    = ${ct:bytesToHex(value.getRow())}</p>
-            <p>RAW ID as string = ${ct:byteAsString(value.getRow())}</p>
-
-        </c:forEach>                        
+        <ul>
+            <c:forEach var="value" items="${values}">                   
+                <li> RAW ID
+                    <p>As toString = ${value.getRow()}</p>            
+                    <p>As IntStr    = ${ct:bytesToIntStr(value.getRow())}</p>
+                    <p>As HEX    = ${ct:bytesToHex(value.getRow())}</p>
+                    <p>As string = ${ct:byteAsString(value.getRow())}</p>
+                    <ul>
+                        <c:forEach var="cell" items="${value.rawCells()}">
+                            <li>
+                            <p>${ct:byteAsString(cell.getFamily())} : ${ct:byteAsString(cell.getQualifier())} =  ${ct:byteAsString(cell.getValue())}</p>
+                            </li>
+                        </c:forEach>                        
+                    </ul>
+                </li>
+            </c:forEach>                        
+        </ul>    
     </div>        
 </div>    
 <jsp:include page="footer.jsp" />

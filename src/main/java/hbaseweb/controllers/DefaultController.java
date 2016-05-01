@@ -58,6 +58,7 @@ public class DefaultController {
                     System.out.println(tablename);
                     Scan scan = new Scan();
                     ResultScanner results = table.getScanner(scan);
+                    
                     Result[] values = results.next(50);
 //                    for (Result result = results.next(); result != null; result = results.next()) {
 //                        
