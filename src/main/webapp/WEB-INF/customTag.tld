@@ -14,6 +14,15 @@
   </function>
   <function>
     <description/>
+    <name>byteAsUUID</name>
+    <function-class>hbaseweb.jstl.ByteTags</function-class>
+    <function-signature>boolean byteAsUUID (byte[])</function-signature>
+    <example>
+      &lt; value="ct:byteAsUUID(byte[])}"&gt;
+    </example>
+  </function>  
+  <function>
+    <description/>
     <name>bytesToIntStr</name>
     <function-class>hbaseweb.jstl.ByteTags</function-class>
     <function-signature>boolean bytesToIntStr (byte[])</function-signature>

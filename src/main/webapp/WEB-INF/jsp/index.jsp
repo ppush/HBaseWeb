@@ -13,7 +13,7 @@
 <div class="row">
     <div class="col-lg-2">
         <c:forEach var="table" items="${tables}">
-            <p><a href="?tablename=${table.getNameAsString()}">${table.getNameAsString()}</a></p>
+            <p><a href="?tablename=${table.getNameAsString()}">${table.getNameAsString()}</a></p>            
             <ul>
                 <c:forEach var="families" items="${table.getFamilies()}">
                     <li>${ct:byteAsString(families.getName())}</li>
@@ -22,11 +22,13 @@
         </c:forEach>
     </div>    
     <div class="col-lg-8">
-        <h2>${tablename}</h2>                 
+        <h2>${tablename}</h2>
+        ${page}        
         <ul>
             <c:forEach var="value" items="${values}">                   
                 <li> RAW ID
                     <p>As toString = ${value.getRow()}</p>            
+                    <p>As UUID    = ${ct:byteAsUUID(value.getRow())}</p>
                     <p>As IntStr    = ${ct:bytesToIntStr(value.getRow())}</p>
                     <p>As HEX    = ${ct:bytesToHex(value.getRow())}</p>
                     <p>As string = ${ct:byteAsString(value.getRow())}</p>
