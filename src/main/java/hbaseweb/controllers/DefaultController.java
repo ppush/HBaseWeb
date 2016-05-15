@@ -48,7 +48,13 @@ public class DefaultController {
 
         map.put("tablename", tablename);
         map.put("page", page);
-        int ipage = Integer.parseInt(page);
+        int ipage = 1;
+        try {
+            ipage = Integer.parseInt(page);
+        } catch (Exception e) {
+            ipage = 1;
+        }
+
         try {
 
             Configuration config = HBaseConfiguration.create();
