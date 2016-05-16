@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package hbaseweb.springform.form;
-
 /**
  *
  * @author vahan
@@ -18,8 +17,9 @@ public class NewTableForm {
         return ColumnFamilys;
     }
 
-    public void setColumnFamilys(String ColumnFamilys) {
-        this.ColumnFamily[0] = ColumnFamilys;
+    public void setColumnFamilys(String strColumnFamilys) {           
+        this.ColumnFamilys = strColumnFamilys.split("\r?\n");
+//        System.out.println(this.ColumnFamilys.length);
     }
 
     public String getName() {

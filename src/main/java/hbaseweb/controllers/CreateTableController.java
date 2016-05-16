@@ -6,6 +6,7 @@
 package hbaseweb.controllers;
 
 import hbaseweb.springform.form.NewTableForm;
+import java.util.Iterator;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.HColumnDescriptor;
@@ -37,7 +38,7 @@ public class CreateTableController {
     }
 
     @RequestMapping(value = "/createtable", method = RequestMethod.POST)
-    public String newtable(NewTableForm newTableForm,ModelMap map) {
+    public String newtable(NewTableForm newTableForm, ModelMap map) {
 
         try {
 
@@ -49,15 +50,19 @@ public class CreateTableController {
             Connection connection = ConnectionFactory.createConnection(config);
             Admin admin = connection.getAdmin();
             TableName tableName = TableName.valueOf(newTableForm.getName());
-            HTableDescriptor tableDescriptor = new HTableDescriptor(tableName);                       
-//            HTableDescriptor tableDescriptor = new HTableDescriptor(TableName.valueOf("dasdas"));
+            HTableDescriptor tableDescriptor = new HTableDescriptor(tableName);
+             //            HTableDescriptor tableDescriptor = new HTableDescriptor(TableName.valueOf("dasdas"));
             // ... with two column families
-            tableDescriptor.addFamily(new HColumnDescriptor("tags"));
-            tableDescriptor.addFamily(new HColumnDescriptor("data"));
+            String[] Famyly = newTableForm.getColumnFamilys();
+            for (int i = 0; i < Famyly.length; i++) {
+                tableDescriptor.addFamily(new HColumnDescriptor(Famyly[i]));
+            }
 
 //            admin.createTable(tableDescriptor);
             map.put("tablename", newTableForm.getName());
             map.put("ColumnFamilys", newTableForm.getColumnFamilys());
+
+            System.out.println(newTableForm.getColumnFamilys().length);
 
         } catch (Exception ce) {
             ce.printStackTrace();
