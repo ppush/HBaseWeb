@@ -17,31 +17,40 @@
             <ul>
                 <c:forEach var="families" items="${table.getFamilies()}">
                     <li>${ct:byteAsString(families.getName())}</li>
-                </c:forEach>     
+                    </c:forEach>     
             </ul>
         </c:forEach>
     </div>    
     <div class="col-lg-8">
-        <h2>${tablename}</h2>
-        ${page}        
-        <ul>
-            <c:forEach var="value" items="${values}">                   
-                <li> RAW ID
-                    <p>As toString = ${value.getRow()}</p>            
-                    <p>As UUID    = ${ct:byteAsUUID(value.getRow())}</p>
-                    <p>As IntStr    = ${ct:bytesToIntStr(value.getRow())}</p>
-                    <p>As HEX    = ${ct:bytesToHex(value.getRow())}</p>
-                    <p>As string = ${ct:byteAsString(value.getRow())}</p>
-                    <ul>
-                        <c:forEach var="cell" items="${value.rawCells()}">
-                            <li>
-                            <p>${ct:byteAsString(cell.getFamily())} : ${ct:byteAsString(cell.getQualifier())} =  ${ct:byteAsString(cell.getValue())}</p>
-                            </li>
-                        </c:forEach>                        
-                    </ul>
-                </li>
-            </c:forEach>                        
-        </ul>    
+        <c:if test="${tablename != null}">
+            <h2>${tablename}</h2>
+
+            <ul class="nav nav-pills">
+                <li role="presentation"><a href="<c:url value="/disable/${tablename}" />">Disable Table</a></li>
+                <li role="presentation"><a href="<c:url value="/deletetable/${tablename}" />">Delete Table</a></li>
+                <li role="presentation"><a href="<c:url value="/"/>">Edit Table</a></li>
+                <li role="presentation"><a href="<c:url value="/"/>">Insert Raw</a></li>
+            </ul>            
+            ${page}        
+            <ul>
+                <c:forEach var="value" items="${values}">                   
+                    <li> RAW ID
+                        <p>As toString = ${value.getRow()}</p>            
+                        <p>As UUID    = ${ct:byteAsUUID(value.getRow())}</p>
+                        <p>As IntStr    = ${ct:bytesToIntStr(value.getRow())}</p>
+                        <p>As HEX    = ${ct:bytesToHex(value.getRow())}</p>
+                        <p>As string = ${ct:byteAsString(value.getRow())}</p>
+                        <ul>
+                            <c:forEach var="cell" items="${value.rawCells()}">
+                                <li>
+                                    <p>${ct:byteAsString(cell.getFamily())} : ${ct:byteAsString(cell.getQualifier())} =  ${ct:byteAsString(cell.getValue())}</p>
+                                </li>
+                            </c:forEach>                        
+                        </ul>
+                    </li>
+                </c:forEach>                        
+            </ul> 
+        </c:if>
     </div>        
 </div>    
 <jsp:include page="footer.jsp" />

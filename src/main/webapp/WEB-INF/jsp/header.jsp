@@ -47,7 +47,7 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="<c:url value="/createtable"/>">Createtable</a></li>
-                            <li><a href="#">Ссылка</a></li>
+<!--                            <li><a href="#">Ссылка</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
@@ -59,9 +59,9 @@
                                     <li class="divider"></li>
                                     <li><a href="#">Еще одна отдельная ссылка</a></li>
                                 </ul>
-                            </li>
+                            </li>-->
                         </ul>
-                        <form class="navbar-form navbar-left" role="search">
+<!--                        <form class="navbar-form navbar-left" role="search">
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Search">
                             </div>
@@ -79,7 +79,7 @@
                                     <li><a href="#">Отдельная ссылка</a></li>
                                 </ul>
                             </li>
-                        </ul>
+                        </ul>-->
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
             </nav>

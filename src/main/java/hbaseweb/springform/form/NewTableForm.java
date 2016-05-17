@@ -11,15 +11,20 @@ package hbaseweb.springform.form;
 public class NewTableForm {
 
     private String name;
-    private String[] ColumnFamilys;
+    private String[] ColumnFamilysList;
+    private String ColumnFamilys;
+    
 
-    public String[] getColumnFamilys() {
+    public String[] getColumnFamilysList() {
+        return ColumnFamilysList;
+    }
+    public String getColumnFamilys() {
         return ColumnFamilys;
     }
-
     public void setColumnFamilys(String strColumnFamilys) {           
-        this.ColumnFamilys = strColumnFamilys.split("\r?\n");
-//        System.out.println(this.ColumnFamilys.length);
+        this.ColumnFamilys = strColumnFamilys;        
+        this.ColumnFamilysList = strColumnFamilys.split("\r?\n");
+//        System.out.println(this.ColumnFamilysList.length);
     }
 
     public String getName() {

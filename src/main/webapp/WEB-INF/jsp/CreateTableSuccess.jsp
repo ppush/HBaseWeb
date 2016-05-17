@@ -11,5 +11,5 @@
 <p>ColumnFamilys: </p>            
 <c:forEach var="ColumnFamily" items="${ColumnFamilys}">
     <p>${ColumnFamily}</p>            
-</c:forEach>
+</c:forEach>    
 <jsp:include page="footer.jsp" />

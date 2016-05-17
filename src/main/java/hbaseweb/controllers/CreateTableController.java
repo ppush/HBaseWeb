@@ -19,8 +19,10 @@ import org.apache.hadoop.hbase.client.HBaseAdmin;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -33,10 +35,57 @@ public class CreateTableController {
     public String index(ModelMap map) {
         NewTableForm newTableForm = new NewTableForm();
         map.put("newTableForm", newTableForm);
-//        map.put("msg", "Hello Spring 4 Web MVC page2!");
         return "CreateTable";
     }
+    
+    @RequestMapping(value = "/deletetable/{tablename}", method = RequestMethod.GET)
+    public String delete(@PathVariable(value = "tablename") String tablename,ModelMap map) {
+        
+        try {
 
+            Configuration config = HBaseConfiguration.create();
+            config.clear();
+            config.set("hbase.zookeeper.quorum", "192.168.10.50");
+            config.set("hbase.zookeeper.property.clientPort", "2181");
+            HBaseAdmin.checkHBaseAvailable(config);
+            Connection connection = ConnectionFactory.createConnection(config);
+            Admin admin = connection.getAdmin();
+            TableName tableName = TableName.valueOf(tablename);
+            HTableDescriptor tableDescriptor = new HTableDescriptor(tableName);    
+            admin.deleteTable(tableName);
+        } catch (Exception ce) {
+            ce.printStackTrace();            
+            map.put("error", ce);
+            return "delete";
+        }        
+        
+        return "delete";
+    }    
+
+    @RequestMapping(value = "/disable/{tablename}", method = RequestMethod.GET)
+    public String Disable(@PathVariable(value = "tablename") String tablename,ModelMap map) {
+        
+        try {
+
+            Configuration config = HBaseConfiguration.create();
+            config.clear();
+            config.set("hbase.zookeeper.quorum", "192.168.10.50");
+            config.set("hbase.zookeeper.property.clientPort", "2181");
+            HBaseAdmin.checkHBaseAvailable(config);
+            Connection connection = ConnectionFactory.createConnection(config);
+            Admin admin = connection.getAdmin();
+            TableName tableName = TableName.valueOf(tablename);
+            HTableDescriptor tableDescriptor = new HTableDescriptor(tableName);    
+            admin.disableTable(tableName);
+        } catch (Exception ce) {
+            ce.printStackTrace();            
+            map.put("error", ce);
+            return "delete";
+        }        
+        
+        return "delete";
+    }     
+    
     @RequestMapping(value = "/createtable", method = RequestMethod.POST)
     public String newtable(NewTableForm newTableForm, ModelMap map) {
 
@@ -53,20 +102,22 @@ public class CreateTableController {
             HTableDescriptor tableDescriptor = new HTableDescriptor(tableName);
              //            HTableDescriptor tableDescriptor = new HTableDescriptor(TableName.valueOf("dasdas"));
             // ... with two column families
-            String[] Famyly = newTableForm.getColumnFamilys();
-            for (int i = 0; i < Famyly.length; i++) {
+            String[] Famyly = newTableForm.getColumnFamilysList();
+            for (int i = 0; i < Famyly.length; i++) {                
                 tableDescriptor.addFamily(new HColumnDescriptor(Famyly[i]));
             }
 
-//            admin.createTable(tableDescriptor);
+            admin.createTable(tableDescriptor);
             map.put("tablename", newTableForm.getName());
             map.put("ColumnFamilys", newTableForm.getColumnFamilys());
 
-            System.out.println(newTableForm.getColumnFamilys().length);
+//            System.out.println(newTableForm.getColumnFamilys().length);
 
         } catch (Exception ce) {
             ce.printStackTrace();
-
+            map.put("newTableForm", newTableForm);
+            map.put("error", ce);
+            return "CreateTable";
         }
 
         return "CreateTableSuccess";

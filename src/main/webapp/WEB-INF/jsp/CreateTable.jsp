@@ -7,12 +7,12 @@
 
 <jsp:include page="header.jsp" />
 <h4>Create new table</h4>
-
+${error}
 
 <form:form method="post" commandName="newTableForm">
     <table>
         <tr>
-            <td>TableName:</td>
+            <td>Table qualifier:</td>
             <td><form:input path="name" /></td>
             <td><span class="error"><form:errors path="name" /></span></td>
         </tr>
