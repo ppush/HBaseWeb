@@ -12,8 +12,8 @@
 <h4>Spring 4 Web MVC via Annotations</h4>
 <div class="row">
     <div class="col-lg-2">
-        <c:forEach var="table" items="${tables}">
-            <p><a href="?tablename=${table.getNameAsString()}">${table.getNameAsString()}</a></p>            
+        <c:forEach var="table" items="${tables}">            
+            <p><a href="?tablename=${table.getNameAsString()}">${table.getNameAsString()}</a></p>                       
             <ul>
                 <c:forEach var="families" items="${table.getFamilies()}">
                     <li>${ct:byteAsString(families.getName())}</li>
@@ -29,7 +29,7 @@
                 <li role="presentation"><a href="<c:url value="/disable/${tablename}" />">Disable Table</a></li>
                 <li role="presentation"><a href="<c:url value="/deletetable/${tablename}" />">Delete Table</a></li>
                 <li role="presentation"><a href="<c:url value="/"/>">Edit Table</a></li>
-                <li role="presentation"><a href="<c:url value="/"/>">Insert Raw</a></li>
+                <li role="presentation"><a href="<c:url value="/insert/${tablename}"/>">Insert Raw</a></li>
             </ul>            
             ${page}        
             <ul>

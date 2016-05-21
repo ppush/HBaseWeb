@@ -6,6 +6,7 @@
 package hbaseweb.controllers;
 
 import hbaseweb.springform.form.NewTableForm;
+import java.util.Collection;
 import java.util.Iterator;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
@@ -122,9 +123,30 @@ public class CreateTableController {
 
         return "CreateTableSuccess";
     }
-//    @RequestMapping(method = RequestMethod.POST)
-//    public String processSignup(NewTableForm signupForm, BindingResult result) {
-//
-//        return "signup-success";
-//    }
+    @RequestMapping(value = "/insert/{tablename}", method = RequestMethod.GET)
+    public String insert(@PathVariable(value = "tablename") String tablename,ModelMap map) {
+        
+        try {
+
+            Configuration config = HBaseConfiguration.create();
+            config.clear();
+            config.set("hbase.zookeeper.quorum", "192.168.10.50");
+            config.set("hbase.zookeeper.property.clientPort", "2181");
+            HBaseAdmin.checkHBaseAvailable(config);
+            Connection connection = ConnectionFactory.createConnection(config);
+            Admin admin = connection.getAdmin();
+//            TableName tableName = TableName.valueOf(tablename);
+            HTableDescriptor tableDescriptor = admin.getTableDescriptor(TableName.valueOf(tablename));
+            HColumnDescriptor[] colfamilis = tableDescriptor.getColumnFamilies();
+            map.put("table", tableDescriptor);
+            map.put("colfamilis", colfamilis);
+//            admin.deleteTable(tableName);
+        } catch (Exception ce) {
+            ce.printStackTrace();            
+            map.put("error", ce);
+            return "insert";
+        }        
+        
+        return "insert";
+    }  
 }
