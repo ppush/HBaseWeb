@@ -44,6 +44,7 @@
                             <c:forEach var="cell" items="${value.rawCells()}">
                                 <li>
                                     <p>${ct:byteAsString(cell.getFamily())} : ${ct:byteAsString(cell.getQualifier())} =  ${ct:byteAsString(cell.getValue())}</p>
+                                    <p>${ct:byteAsString(cell.getFamily())} : ${ct:byteAsString(cell.getQualifier())} =  ${ct:bytesToIntStr(cell.getValue())}</p>
                                 </li>
                             </c:forEach>                        
                         </ul>

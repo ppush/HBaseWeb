@@ -48,6 +48,12 @@ public class ByteTags extends TagSupport {
             String a = Integer.toString(vv);
             return a;
         }
+        
+        if (aa == 8) {
+            Double vv = Bytes.toDouble(bytes);
+            String a = Double.toString(vv);
+            return a;
+        }        
 
         StringBuffer sb = new StringBuffer(bytes.length * 2);
         for (int i = 0; i < bytes.length; i++) {
