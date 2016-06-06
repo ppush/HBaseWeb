@@ -78,7 +78,7 @@ public class DefaultController {
                     System.out.println(tablename);
 
                     byte[] POSTFIX = new byte[]{0x00};
-                    Filter filter = new PageFilter(10);
+                    Filter filter = new PageFilter(50);
                     int totalRows = 0;
 
                     lastrow = null;

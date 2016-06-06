@@ -25,7 +25,7 @@ public class ByteTags extends TagSupport {
 
         int aa = bytes.length;
         long msb = 0;
-        long lsb = 0;        
+        long lsb = 0;
 //        return Integer.toString(aa);
         if (aa == 16) {
             for (int i = 0; i < 8; i++) {
@@ -34,7 +34,7 @@ public class ByteTags extends TagSupport {
             for (int i = 8; i < 16; i++) {
                 lsb = (lsb << 8) | (bytes[i] & 0xff);
             }
-            UUID uuid = new UUID(msb,lsb);
+            UUID uuid = new UUID(msb, lsb);
             return uuid.toString();
         }
         return "";
@@ -48,12 +48,17 @@ public class ByteTags extends TagSupport {
             String a = Integer.toString(vv);
             return a;
         }
-        
+
         if (aa == 8) {
-            Double vv = Bytes.toDouble(bytes);
+            double vv = Bytes.toDouble(bytes);
             String a = Double.toString(vv);
-            return a;
-        }        
+            if (vv == (long) vv) {
+                return String.format("%d", (long) vv);
+            } else {
+                return String.format("%s", vv);
+            }
+//            return a;
+        }
 
         StringBuffer sb = new StringBuffer(bytes.length * 2);
         for (int i = 0; i < bytes.length; i++) {
