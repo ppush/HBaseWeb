@@ -5,6 +5,7 @@
  */
 package hbaseweb.controllers;
 
+import org.apache.commons.codec.binary.Hex;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,7 +60,7 @@ public class DefaultController {
 
             Configuration config = HBaseConfiguration.create();
             config.clear();
-            config.set("hbase.zookeeper.quorum", "192.168.10.50");
+            config.set("hbase.zookeeper.quorum", "nn1.netangels.net,nn2.netangels.net,rm1.netangels.net");
             config.set("hbase.zookeeper.property.clientPort", "2181");
 
             HBaseAdmin.checkHBaseAvailable(config);
@@ -85,6 +86,9 @@ public class DefaultController {
 
                     Scan scan = new Scan();
                     scan.setFilter(filter);
+//                    byte[] rowPrefix = Hex.decodeHex("000001000004000004000001000001000005000005000002000002000003000003".toCharArray());
+//                    scan.setRowPrefixFilter(rowPrefix);
+                    
                     for (int i = 1; i <= ipage; i++) {
                         if (lastrow != null) {
                             byte[] startRow = Bytes.add(lastrow, POSTFIX);
