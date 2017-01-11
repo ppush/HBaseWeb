@@ -34,7 +34,7 @@
             ${page}        
             <ul>
                 <c:forEach var="value" items="${values}">                   
-                    <li> RAW ID
+                    <li> RAW ID <a href="<c:url value="/deleterow/${tablename}/${ct:bytesToHex(value.getRow())}"/>">Delete Raw</a>
                         <p>As toString = ${value.getRow()}</p>            
                         <p>As UUID    = ${ct:byteAsUUID(value.getRow())}</p>
                         <p>As IntStr    = ${ct:bytesToIntStr(value.getRow())}</p>

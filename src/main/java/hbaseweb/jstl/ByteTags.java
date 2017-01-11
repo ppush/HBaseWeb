@@ -12,6 +12,7 @@ import java.util.UUID;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
+import org.apache.commons.codec.binary.Hex;
 import org.apache.hadoop.hbase.util.Bytes;
 
 /**
@@ -73,16 +74,17 @@ public class ByteTags extends TagSupport {
     }
 
     public static String bytesToHex(byte[] bytes) {
-        StringBuffer sb = new StringBuffer(bytes.length * 2);
-        for (int i = 0; i < bytes.length; i++) {
-            int v = bytes[i] & 0xff;
-            if (v < 16) {
-                sb.append('0');
-            }
-            sb.append(Integer.toHexString(v));
-            sb.append(" ");
-        }
-        return sb.toString().toUpperCase();
+        return Hex.encodeHexString(bytes);
+//        StringBuffer sb = new StringBuffer(bytes.length * 2);
+//        for (int i = 0; i < bytes.length; i++) {
+//            int v = bytes[i] & 0xff;
+//            if (v < 16) {
+//                sb.append('0');
+//            }
+//            sb.append(Integer.toHexString(v));
+//            sb.append(" ");
+//        }
+//        return sb.toString().toUpperCase();
     }
 
     public static String byteAsString(byte[] bytevalue) {
