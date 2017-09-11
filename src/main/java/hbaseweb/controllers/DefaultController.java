@@ -5,7 +5,6 @@
  */
 package hbaseweb.controllers;
 
-import org.apache.commons.codec.binary.Hex;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import org.apache.hadoop.hbase.util.Bytes;
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.hbase.Cell;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.HTableDescriptor;
 import org.apache.hadoop.hbase.client.HBaseAdmin;
@@ -60,7 +58,8 @@ public class DefaultController {
 
             Configuration config = HBaseConfiguration.create();
             config.clear();
-            config.set("hbase.zookeeper.quorum", "nn1.netangels.net,nn2.netangels.net,rm1.netangels.net");
+            config.set("hbase.zookeeper.quorum", "192.168.220.201 ,192.168.220.202 ,192.168.220.203");
+//            config.set("hbase.zookeeper.quorum", "zk00.oddeye.co,zk01.oddeye.co,zk02.oddeye.co");
             config.set("hbase.zookeeper.property.clientPort", "2181");
 
             HBaseAdmin.checkHBaseAvailable(config);
